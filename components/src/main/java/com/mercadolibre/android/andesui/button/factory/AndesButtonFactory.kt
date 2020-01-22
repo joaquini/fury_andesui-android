@@ -182,7 +182,7 @@ internal object AndesButtonFactory {
      * @param size determined size of the button: Needed because the margins are different for each size.
      * @param leftIcon probable icon of the button. Needed because the margins are different if the button has icon or not.
      * @param rightIcon probable icon of the button. Needed because the margins are different if the button has icon or not.
-     * @param context needed for accesing dimen resources.
+     * @param context needed for accessing dimen resources.
      */
     private fun resolveMargin(size: AndesButtonSizeInterface, leftIcon: Drawable?, rightIcon: Drawable?, context: Context) = AndesButtonMargin(size, leftIcon, rightIcon, context)
 
