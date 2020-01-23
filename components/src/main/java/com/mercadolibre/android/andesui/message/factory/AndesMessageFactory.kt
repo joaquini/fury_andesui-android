@@ -9,10 +9,11 @@ import com.mercadolibre.android.andesui.message.state.AndesMessageState
 import com.mercadolibre.android.andesui.message.state.AndesMessageStateInterface
 import com.mercadolibre.android.andesui.message.hierarchy.AndesMessageHierarchy
 import com.mercadolibre.android.andesui.message.hierarchy.AndesMessageHierarchyInterface
+import com.mercadolibre.android.andesui.message.state.getConfiguredBackgroundState
 
 internal data class AndesMessageConfiguration(
         val iconBackgroundColor: Int,
-        val backgroundColor: Int,
+        val backgroundColor: Drawable,
         val pipeColor: Int,
         val textColor: Int,
         val titleText: String? = "Title",
@@ -103,7 +104,8 @@ internal object AndesMessageFactory {
     }
 
     private fun resolveIconBackgroundColor(state: AndesMessageStateInterface, context: Context) = state.iconBackgroundColor(context)
-    private fun resolveBackgroundColor(hierarchy: AndesMessageHierarchyInterface, state: AndesMessageStateInterface, context: Context) = hierarchy.backgroundColor(context, state)
+//    private fun resolveBackgroundColor(hierarchy: AndesMessageHierarchyInterface, state: AndesMessageStateInterface, context: Context) = hierarchy.backgroundColor(context, state)
+    private fun resolveBackgroundColor(hierarchy: AndesMessageHierarchyInterface, state: AndesMessageStateInterface, context: Context) = getConfiguredBackgroundState(hierarchy, state, context)
     private fun resolvePipeColor(state: AndesMessageStateInterface, context: Context) = state.pipeColor(context)
     private fun resolveTextColor(hierarchy: AndesMessageHierarchyInterface, context: Context) = hierarchy.textColor(context)
     private fun resolveTitleSize(context: Context) = context.resources.getDimension(R.dimen.andesui_message_title)

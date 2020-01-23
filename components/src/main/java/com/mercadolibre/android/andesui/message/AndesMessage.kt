@@ -1,8 +1,10 @@
 package com.mercadolibre.android.andesui.message
 
 import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Path
+import android.graphics.RectF
 import android.support.constraint.ConstraintLayout
-import android.support.v7.widget.CardView
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -15,6 +17,7 @@ import com.mercadolibre.android.andesui.message.factory.AndesMessageConfiguratio
 import com.mercadolibre.android.andesui.message.factory.AndesMessageFactory
 import com.mercadolibre.android.andesui.message.hierarchy.AndesMessageHierarchy
 import com.mercadolibre.android.andesui.message.state.AndesMessageState
+
 
 class AndesMessage : FrameLayout {
 
@@ -72,10 +75,8 @@ class AndesMessage : FrameLayout {
         setupViewId()
 
         setupTitleComponent()
-//        addView(titleComponent)
 
         setupDescriptionComponent()
-//        addView(descriptionComponent)
 
         setupBackground()
 
@@ -93,11 +94,6 @@ class AndesMessage : FrameLayout {
      *
      */
     private fun initComponents() {
-//        titleComponent = TextView(context)
-//        descriptionComponent = TextView(context)
-//        iconComponent = ImageView(context)
-//        dismissableComponent = ImageView(context)
-
         val container = LayoutInflater.from(context).inflate(R.layout.andesui_layout_message, this, true)
 
         messageContainer = container.findViewById(R.id.andesui_message_container)
@@ -142,7 +138,8 @@ class AndesMessage : FrameLayout {
     }
 
     private fun setupBackground() {
-        messageContainer.setBackgroundColor(config.backgroundColor)
+//        messageContainer.clipToOutline = true
+        messageContainer.background = config.backgroundColor
     }
 
     private fun setupPipe() {
@@ -175,4 +172,35 @@ class AndesMessage : FrameLayout {
         }
     }
 
+    //What about moving all of this to a delegate? That delegate would be in charge of knowing if API 21 or not.
+    //See https://github.com/JcMinarro/RoundKornerLayouts/blob/master/roundkornerlayout/src/main/java/com/jcminarro/roundkornerlayout/CanvasRounder.kt
+    private var rectF: RectF? = null
+    private val path = Path()
+    private val cornerRadius = 100f
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        rectF = RectF(0f, 0f, w.toFloat(), h.toFloat())
+        resetPath()
+    }
+
+    override fun draw(canvas: Canvas) {
+        val save: Int = canvas.save()
+        canvas.clipPath(path)
+        super.draw(canvas)
+        canvas.restoreToCount(save)
+    }
+
+    override fun dispatchDraw(canvas: Canvas) {
+        val save: Int = canvas.save()
+        canvas.clipPath(path)
+        super.dispatchDraw(canvas)
+        canvas.restoreToCount(save)
+    }
+
+    private fun resetPath() {
+        path.reset()
+        path.addRoundRect(rectF, cornerRadius, cornerRadius, Path.Direction.CW)
+        path.close()
+    }
 }

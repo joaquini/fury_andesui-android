@@ -1,103 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/andesui_message_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:cardCornerRadius="6dp"
-    app:cardPreventCornerOverlap="true"
-    app:cardElevation="0dp">
+    android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/andesui_message_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/andesui_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/andesui_dismissableleft_guideline"
+        app:layout_constraintStart_toStartOf="@+id/andesui_righticon_guideline"
+        app:layout_constraintTop_toTopOf="@+id/andesui_top_guideline" />
 
-        <TextView
-            android:id="@+id/andesui_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="TextView"
-            app:layout_constraintEnd_toStartOf="@+id/andesui_dismissableleft_guideline"
-            app:layout_constraintStart_toStartOf="@+id/andesui_righticon_guideline"
-            app:layout_constraintTop_toTopOf="@+id/andesui_top_guideline" />
+    <TextView
+        android:id="@+id/andesui_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/andesui_guideline7"
+        app:layout_constraintEnd_toStartOf="@+id/andesui_dismissableleft_guideline"
+        app:layout_constraintStart_toStartOf="@+id/andesui_righticon_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/andesui_title" />
 
-        <TextView
-            android:id="@+id/andesui_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/andesui_guideline7"
-            app:layout_constraintEnd_toStartOf="@+id/andesui_dismissableleft_guideline"
-            app:layout_constraintStart_toStartOf="@+id/andesui_righticon_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/andesui_title" />
+    <ImageView
+        android:id="@+id/andesui_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxHeight="16dp"
+        android:minHeight="16dp"
+        app:layout_constraintStart_toStartOf="@+id/andesui_lefticon_guideline"
+        app:layout_constraintTop_toTopOf="@+id/andesui_top_guideline" />
 
-        <ImageView
-            android:id="@+id/andesui_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxHeight="16dp"
-            android:minHeight="16dp"
-            app:layout_constraintStart_toStartOf="@+id/andesui_lefticon_guideline"
-            app:layout_constraintTop_toTopOf="@+id/andesui_top_guideline" />
+    <ImageView
+        android:id="@+id/andesui_dismissable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/andesui_icon"
+        app:layout_constraintEnd_toStartOf="@+id/andesui_dismissableright_guideline"
+        app:layout_constraintTop_toTopOf="@+id/andesui_top_guideline" />
 
-        <ImageView
-            android:id="@+id/andesui_dismissable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/andesui_icon"
-            app:layout_constraintEnd_toStartOf="@+id/andesui_dismissableright_guideline"
-            app:layout_constraintTop_toTopOf="@+id/andesui_top_guideline" />
+    <android.support.constraint.Guideline
+        android:id="@+id/andesui_righticon_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="48dp" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/andesui_righticon_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="48dp" />
+    <android.support.constraint.Guideline
+        android:id="@+id/andesui_dismissableleft_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="48dp" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/andesui_dismissableleft_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="48dp" />
+    <android.support.constraint.Guideline
+        android:id="@+id/andesui_lefticon_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/andesui_lefticon_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="16dp" />
+    <android.support.constraint.Guideline
+        android:id="@+id/andesui_dismissableright_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/andesui_dismissableright_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="16dp" />
+    <android.support.constraint.Guideline
+        android:id="@+id/andesui_top_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="16dp" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/andesui_top_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="16dp" />
+    <android.support.constraint.Guideline
+        android:id="@+id/andesui_guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="16dp" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/andesui_guideline7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_end="16dp" />
+    <View
+        android:id="@+id/andesui_pipe"
+        android:layout_width="4dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/andesui_pipe"
-            android:layout_width="4dp"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    </android.support.constraint.ConstraintLayout>
-</android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>
