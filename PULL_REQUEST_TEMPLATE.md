@@ -25,18 +25,18 @@ This is a UI library, delight us with some stunning images.
 
 ## Checks
 Are you sure you followed all those steps? In such case, let's say with me "I solemnly declare that ...":
-	- [ ] I have coded an example inside the Demo App,
-	- [ ] I have added proper tests,
-	- [ ] I have modified the [Changelog](https://github.com/mercadolibre/...) file,
-	- [ ] I have updated GitHub wiki,
-	- [ ] I have the explicit approval of one or more members of the UX Team,
-	- [ ] I have updated the version in gradle.properties file.
+- [ ] I have coded an example inside the Demo App,
+- [ ] I have added proper tests,
+- [ ] I have modified the [Changelog](https://github.com/mercadolibre/...) file,
+- [ ] I have updated GitHub wiki,
+- [ ] I have the explicit approval of one or more members of the UX Team,
+- [ ] I have updated the version in gradle.properties file.
 
 ## Change type
 This is easy, let us know what this code is about:
-	- [ ] This code adds a new component
-	- [ ] This code includes improvements to an existent component
-	- [ ] This code improves or modifies ONLY the Demo App.
+- [ ] This code adds a new component
+- [ ] This code includes improvements to an existent component
+- [ ] This code improves or modifies ONLY the Demo App.
 
 ## Check common errors
 Whether you are an Android or iOS developer and if you're still there then we'll give you a present:
