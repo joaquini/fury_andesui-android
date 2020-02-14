@@ -24,7 +24,7 @@
         <com.mercadolibre.android.andesui.button.AndesButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/button_margin_vertical"
             app:andesButtonSize="large"
             app:andesButtonHierarchy="loud"
             app:andesButtonText="@string/loud_large_button" />
@@ -32,7 +32,7 @@
         <com.mercadolibre.android.andesui.button.AndesButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/button_margin_vertical"
             app:andesButtonSize="medium"
             app:andesButtonHierarchy="loud"
             app:andesButtonText="@string/loud_medium_button" />
@@ -48,7 +48,7 @@
         <com.mercadolibre.android.andesui.button.AndesButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/button_margin_vertical"
             app:andesButtonEnabled="false"
             app:andesButtonSize="large"
             app:andesButtonHierarchy="loud"
@@ -57,7 +57,7 @@
         <com.mercadolibre.android.andesui.button.AndesButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/button_margin_vertical"
             app:andesButtonLeftIconCustom="@drawable/andesui_icon"
             app:andesButtonSize="large"
             app:andesButtonHierarchy="loud"
@@ -66,11 +66,34 @@
         <com.mercadolibre.android.andesui.button.AndesButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/button_margin_vertical"
+            app:andesButtonEnabled="false"
             app:andesButtonRightIconCustom="@drawable/andesui_icon"
             app:andesButtonSize="large"
             app:andesButtonHierarchy="loud"
             app:andesButtonText="@string/large_button_right_icon" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/andesui_demoapp_label_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/button_margin_vertical_2x"
+                android:text="@string/andesui_demoapp_label_more" />
+
+            <com.mercadolibre.android.andesui.button.AndesButton
+                android:id="@+id/andesui_demoapp_andes_specs_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/button_margin_vertical"
+                app:andesButtonHierarchy="quiet"
+                app:andesButtonSize="medium"
+                app:andesButtonText="@string/andesui_demoapp_label_andes_button_specs"
+                app:layout_constraintTop_toBottomOf="@id/andesui_demoapp_label_more" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

@@ -53,5 +53,27 @@
             app:andesButtonSize="large"
             app:andesButtonHierarchy="transparent"
             app:andesButtonText="@string/transparent_large_button_disabled" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/andesui_demoapp_label_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/button_margin_vertical_2x"
+                android:text="@string/andesui_demoapp_label_more" />
+
+            <com.mercadolibre.android.andesui.button.AndesButton
+                android:id="@+id/andesui_demoapp_andes_specs_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/button_margin_vertical"
+                app:andesButtonHierarchy="quiet"
+                app:andesButtonSize="medium"
+                app:andesButtonText="@string/andesui_demoapp_label_andes_button_specs"
+                app:layout_constraintTop_toBottomOf="@id/andesui_demoapp_label_more" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

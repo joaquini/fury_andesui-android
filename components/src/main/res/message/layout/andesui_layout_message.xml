@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:parentTag="android.support.v7.widget.CardView">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/andesui_message_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
+
+        <TextView
+            android:id="@+id/andesui_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/andesui_message_distance_title_body"
+            app:layout_constraintEnd_toStartOf="@+id/andesui_dismissableleft_guideline"
+            app:layout_constraintStart_toStartOf="@+id/andesui_righticon_guideline"
+            app:layout_constraintTop_toTopOf="@+id/andesui_top_guideline" />
+
+        <TextView
+            android:id="@+id/andesui_body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/andesui_bottom_guideline"
+            app:layout_constraintEnd_toStartOf="@+id/andesui_dismissableleft_guideline"
+            app:layout_constraintStart_toStartOf="@+id/andesui_righticon_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/andesui_title"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/andesui_icon"
+            android:layout_width="@dimen/andesui_message_icon_diameter"
+            android:layout_height="@dimen/andesui_message_icon_diameter"
+            android:maxHeight="@dimen/andesui_message_icon_diameter"
+            android:minHeight="@dimen/andesui_message_icon_diameter"
+            app:layout_constraintStart_toStartOf="@+id/andesui_lefticon_guideline"
+            app:layout_constraintTop_toTopOf="@+id/andesui_top_guideline" />
+
+        <ImageView
+            android:id="@+id/andesui_dismissable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/andesui_icon"
+            app:layout_constraintEnd_toStartOf="@+id/andesui_dismissableright_guideline"
+            app:layout_constraintTop_toTopOf="@+id/andesui_top_guideline" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/andesui_righticon_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/andesui_message_guideline_text_start" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/andesui_dismissableleft_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/andesui_message_guideline_text_end" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/andesui_lefticon_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/andesui_message_guideline_icon_start" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/andesui_dismissableright_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/andesui_message_guideline_icon_end" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/andesui_top_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="@dimen/andesui_message_guideline_padding_top" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/andesui_bottom_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/andesui_message_guideline_padding_bottom" />
+
+        <View
+            android:id="@+id/andesui_pipe"
+            android:layout_width="@dimen/andesui_message_pipe_width"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/andesui_primary_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:andesButtonHierarchy="loud"
+            app:andesButtonSize="medium"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/andesui_bottom_guideline"
+            app:layout_constraintEnd_toStartOf="@+id/andesui_dismissableleft_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/andesui_righticon_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/andesui_body"
+            app:layout_constraintVertical_bias="1.0"
+            tools:visibility="visible" />
+
+        <com.mercadolibre.android.andesui.button.AndesButton
+            android:id="@+id/andesui_secondary_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:andesButtonHierarchy="transparent"
+            app:andesButtonSize="medium"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/andesui_bottom_guideline"
+            app:layout_constraintEnd_toStartOf="@+id/andesui_dismissableleft_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/andesui_primary_action"
+            app:layout_constraintTop_toBottomOf="@+id/andesui_body"
+            app:layout_constraintVertical_bias="1.0"
+            tools:visibility="visible" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</merge>

@@ -15,7 +15,7 @@ implementation com.mercadolibre.android.andesui:components:X.Y.Z
 ```
 
 ### Latest version
-[ ![Download](https://api.bintray.com/packages/mercadolibre/android-public/com.mercadolibre.android.andesui.components/images/download.svg?version=1.0.0) ](https://bintray.com/mercadolibre/android-public/com.mercadolibre.android.andesui.components/1.0.0/link)
+[ ![Download](https://api.bintray.com/packages/mercadolibre/android-public/com.mercadolibre.android.andesui.components/images/download.svg) ](https://bintray.com/mercadolibre/android-public/com.mercadolibre.android.andesui.components/_latestVersion)
 
 ## Useful links
 
@@ -41,14 +41,6 @@ If you want to know more about it, you can watch this [explanation video](https:
 ## Requirements
 
 This library needs Android API 19+ (4.4+) to work.
-
-## How to make a local publish
-
-``
-./gradlew build publishToMavenLocal
-``
-
-Pro tip: First change the version name in gradle.properties to X.XX.X-LOCAL (Note that we use [SemVer](https://semver.org/)).
 
 ## DON'Ts
 

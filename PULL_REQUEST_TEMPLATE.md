@@ -1,8 +1,8 @@
 ### Thanks for starting a pull request on Andes UI!
 
 ## Useful links
-- [Contributing](https://github.com/mercadolibre/...) has more information and tips for a great pull request. This will give you a nice introduction about how to contribute with Andes.
-- [Wiki](https://github.com/mercadolibre/...) has all the info you need to start with Andes. Even I heard there's a video there...
+- [Contributing](https://github.com/mercadolibre/fury_andesui-android/blob/develop/CONTRIBUTING.md) has more information and tips for a great pull request. This will give you a nice introduction about how to contribute with Andes.
+- [Wiki](https://github.com/mercadolibre/fury_andesui-android/wiki) has all the info you need to start with Andes. Even I heard there's a video there...
 
 ## Motivation
 Tell us why you are here and why you took time to develop new code for our beloved lib.
@@ -27,7 +27,7 @@ This is a UI library, delight us with some stunning images.
 Are you sure you followed all those steps? In such case, let's say with me "I solemnly declare that ...":
 - [ ] I have coded an example inside the Demo App,
 - [ ] I have added proper tests,
-- [ ] I have modified the [Changelog](https://github.com/mercadolibre/...) file,
+- [ ] I have modified the [Changelog](https://github.com/mercadolibre/fury_andesui-android/blob/develop/CHANGELOG.md) file,
 - [ ] I have updated GitHub wiki,
 - [ ] I have the explicit approval of one or more members of the UX Team,
 - [ ] I have updated the version in gradle.properties file.

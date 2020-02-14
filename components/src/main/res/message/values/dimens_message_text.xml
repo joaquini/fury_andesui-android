@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="andesui_message_title">@dimen/andesui_text_size_subhead</dimen>
+    <dimen name="andesui_message_body">@dimen/andesui_text_size_body</dimen>
+    <dimen name="andesui_message_line_height">@dimen/andesui_text_default_line_height</dimen>
+
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <declare-styleable name="AndesMessage" tools:ignore="ResourceName">
+        <attr name="andesMessageHierarchy">
+            <enum name="loud" value="1000" />
+            <enum name="quiet" value="1001" />
+        </attr>
+
+        <attr name="andesMessageType">
+            <enum name="neutral" value="2000" />
+            <enum name="success" value="2001" />
+            <enum name="warning" value="2002" />
+            <enum name="error" value="2003" />
+        </attr>
+
+
+        <attr name="andesMessageTitleText" format="reference" />
+
+        <attr name="andesMessageBodyText" format="reference" />
+
+        <attr name="andesMessageDismissable" format="boolean" />
+    </declare-styleable>
+
+</resources>

@@ -8,7 +8,8 @@
         android:label="@string/andesui_demoapp_app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        android:allowBackup="false">
 
         <activity android:name="com.mercadolibre.android.andesui.demoapp.MainActivity">
             <intent-filter>
@@ -17,7 +18,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.mercadolibre.android.andesui.demoapp.ButtonShowcaseActivity">
+        <activity android:name="com.mercadolibre.android.andesui.demoapp.feature.ButtonShowcaseActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -27,6 +28,34 @@
                 <data
                     android:host="andes"
                     android:path="/button"
+                    android:scheme="meli" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.mercadolibre.android.andesui.demoapp.feature.MessageShowcaseActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="andes"
+                    android:path="/message"
+                    android:scheme="meli" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.mercadolibre.android.andesui.demoapp.feature.WhatsNewActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="andes"
+                    android:path="/whats-new"
                     android:scheme="meli" />
             </intent-filter>
         </activity>

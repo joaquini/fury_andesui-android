@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable
 import com.mercadolibre.android.andesui.button.AndesButton
 
 /**
- * Useful class that holds icon relative data that the [AndesButtonFactory] will put
+ * Useful class that holds icon relative data that the [AndesButtonConfigurationFactory] will put
  * into [AndesButtonConfiguration] to determine the icon to put into the [AndesButton].
  *
  * TL;DR: Data of the icon to draw, if any, inside the button.

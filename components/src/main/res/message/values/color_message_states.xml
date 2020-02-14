@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="andesui_message_highlight_primary">@color/andesui_bu_accent_primary</color>
+    <color name="andesui_message_highlight_primary_dark">@color/andesui_bu_accent_secondary</color>
+
+    <color name="andesui_message_success_primary">@color/andesui_green</color>
+    <color name="andesui_message_success_primary_dark">@color/andesui_green_dark</color>
+
+    <color name="andesui_message_warning_primary">@color/andesui_orange</color>
+    <color name="andesui_message_warning_primary_dark">@color/andesui_orange_dark</color>
+
+    <color name="andesui_message_error_primary">@color/andesui_red</color>
+    <color name="andesui_message_error_primary_dark">@color/andesui_red_dark</color>
+
+</resources>

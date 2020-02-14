@@ -1,18 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+
+    <com.mercadolibre.android.andesui.message.AndesMessage
+        android:id="@+id/andesui_demoapp_changelog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/button_margin_vertical"
+        android:layout_marginTop="@dimen/button_margin_vertical"
+        android:layout_marginRight="@dimen/button_margin_vertical"
+        app:andesMessageBodyText="@string/andesui_demoapp_label_whatsnew_body"
+        app:andesMessageHierarchy="quiet"
+        app:andesMessageTitleText="@string/andesui_demoapp_label_whatsnew_title"
+        app:andesMessageType="neutral"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/andesui_demoapp_label_showcase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/button_margin_vertical"
+        android:layout_marginTop="@dimen/button_margin_vertical"
+        android:layout_marginRight="@dimen/button_margin_vertical"
+        android:text="@string/andesui_demoapp_label_showcase"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/andesui_demoapp_changelog" />
 
     <com.mercadolibre.android.andesui.button.AndesButton
         android:id="@+id/andesui_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:andesButtonText="@string/andes_button_showcase"
-        app:andesButtonLeftIconCustom="@drawable/andesui_icon"
+        android:layout_marginLeft="@dimen/button_margin_vertical"
+        android:layout_marginRight="@dimen/button_margin_vertical"
+        android:layout_marginTop="@dimen/button_margin_vertical"
+        app:andesButtonHierarchy="loud"
         app:andesButtonSize="large"
-        app:andesButtonHierarchy="loud" />
+        app:andesButtonText="@string/andes_button_showcase"
+        app:layout_constraintTop_toBottomOf="@id/andesui_demoapp_label_showcase" />
 
-</LinearLayout>
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/andesui_messages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/button_margin_vertical"
+        android:layout_marginTop="@dimen/button_margin_vertical"
+        android:layout_marginRight="@dimen/button_margin_vertical"
+        app:andesButtonHierarchy="loud"
+        app:andesButtonSize="large"
+        app:andesButtonText="@string/andes_message_showcase"
+        app:layout_constraintTop_toBottomOf="@id/andesui_buttons" />
+
+    <TextView
+        android:id="@+id/andesui_demoapp_label_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/button_margin_vertical"
+        android:layout_marginTop="@dimen/button_margin_vertical"
+        android:layout_marginRight="@dimen/button_margin_vertical"
+        android:text="@string/andesui_demoapp_label_more"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/andesui_messages" />
+
+    <com.mercadolibre.android.andesui.button.AndesButton
+        android:id="@+id/andesui_demoapp_andes_specs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/button_margin_vertical"
+        android:layout_marginTop="@dimen/button_margin_vertical"
+        android:layout_marginRight="@dimen/button_margin_vertical"
+        app:andesButtonHierarchy="quiet"
+        app:andesButtonSize="large"
+        app:andesButtonText="@string/andesui_demoapp_label_andes_specs"
+        app:layout_constraintTop_toBottomOf="@id/andesui_demoapp_label_more" />
+
+</android.support.constraint.ConstraintLayout>

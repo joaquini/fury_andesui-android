@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="andesui_message_corner_radius">6dp</dimen>
+    <dimen name="andesui_message_pipe_corner_radius">0dp</dimen>
+    <dimen name="andesui_message_left_corner_radius">0dp</dimen>
+
+    <dimen name="andesui_message_dismissable_icon_width">20dp</dimen>
+    <dimen name="andesui_message_dismissable_icon_height">20dp</dimen>
+
+    <dimen name="andesui_message_icon_diameter">16dp</dimen>
+
+    <dimen name="andesui_message_distance_title_body">8dp</dimen>
+    <dimen name="andesui_message_guideline_text_start">48dp</dimen>
+    <dimen name="andesui_message_guideline_text_end">48dp</dimen>
+    <dimen name="andesui_message_guideline_icon_start">16dp</dimen>
+    <dimen name="andesui_message_guideline_icon_end">16dp</dimen>
+    <dimen name="andesui_message_guideline_padding_top">16dp</dimen>
+    <dimen name="andesui_message_guideline_padding_bottom">16dp</dimen>
+
+    <dimen name="andesui_message_pipe_width">4dp</dimen>
+
+</resources>

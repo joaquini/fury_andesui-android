@@ -28,9 +28,11 @@ android {
         minSdkVersion minApiLevel
         targetSdkVersion maxApiLevel
         versionCode "$demoAppVersionCode".toInteger()
-        versionName "$demoAppVersionName"
+        versionName "$libraryVersion"
 
         multiDexEnabled true
+
+        resValue("string", "andesui_demoapp_app_name", "Andes UI v${libraryVersion}")
     }
 
     buildTypes {
@@ -72,4 +74,24 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+
+    /**
+     * It enables us to show the What's New which is in markdown format.
+     * https://github.com/noties/Markwon
+     */
+    implementation "io.noties.markwon:core:$markwonVersion"
 }
+
+/**
+ * Based on https://discuss.gradle.org/t/how-to-copy-and-rename-a-single-file/5956
+ */
+task copyChangelog(type: Copy) {
+    logger.info("Copying CHANGELOG.md file to the Andes app...")
+    from '../CHANGELOG.md'
+    into 'src/main/res/raw'
+    rename { String fileName ->
+        fileName.replace("CHANGELOG.md", "andesui_demoapp_changelog.md")
+    }
+}
+
+tasks.copyChangelog.execute()

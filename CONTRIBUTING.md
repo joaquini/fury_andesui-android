@@ -23,12 +23,19 @@ We expect to be all aboard this boat... and we are a lot. That's why we have som
     - If it's a new component then you'll have to add a new Button inside the main page of the Demo App that links to a new Activity that will be the showcase of that new component. You also will have to add that Activity, based on the existing one. Be aware that all the sample activities have a deeplink. For example, the deeplink of the Button Showcase is `meli://andes/button`. Checkout the Demo App's manifest file. Be sure to follow the existing way of developing those showcases. Or propose us a radical new way :D
     - If it's a variation of an existing component (i.e. you develop a new feature for the Andes Button that allows it to become a jumping button, please add this use case to the existing Button Showcase. We all love animations).
 - You are proud of your work. That new feature rocks. (Or thanks to this fix, the component now really rocks). You run `./gradlew check` and everything ran perfectly and smooth. Oh, boy, this needs to be part of Andes UI. Now you commit your latest changes.
+- You make a local publish and you test the changes in an external project that consumes this lib.
 - In your fork you have a branch called `feature/<name-of-new-andes-component>`, or maybe `fix/<name-of-the-fixed-andes-component>`, and you got all the changes committed there.
 - You go to the Andes UI repo and open a Pull Request. You read all the lines inside the suggested template. And also you tick those checkboxes with those ugly questions. You are getting closer to the glory. Take some screenshots and add them to the Pull Request! The world needs to be aware of this.
 - You finally create the Pull Request. Continuous Integration starts to work (did we say we use Circle CI?). What am I seeing? All those checks in green! Nice!
 - Our guys check that shiny Pull Request, put some evil comments, you agree with them, you make the changes and... Oh, the Pull Request gets merged.
 - Nice job! We really thank you.
 
+## How to make a local publish
+``
+./gradlew build publishToMavenLocal
+``
+
+*Pro tip*: First change the version name in gradle.properties to X.XX.X-LOCAL (Note that we use [SemVer](https://semver.org/)).
 
 ## Running the Demo App
 Before submitting a Pull Request, please make sure the Demo App is able to show the results of your heavy work.

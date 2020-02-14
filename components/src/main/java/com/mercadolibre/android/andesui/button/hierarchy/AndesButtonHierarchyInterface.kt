@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.support.annotation.ColorInt
-import android.support.v4.content.ContextCompat
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.typeface.getFontOrDefault
@@ -28,8 +26,8 @@ internal sealed class AndesButtonHierarchyInterface {
 
     /**
      * Returns a [ColorStateList] that contains the data for the text color.
-     * We are using [ColorStateList] because text color depends on the button state. E.g. text color for enabled state is different
-     * than for the disabled state.
+     * We are using [ColorStateList] because text color depends on the button type. E.g. text color for enabled type is different
+     * than for the disabled type.
      *
      * @param context needed for accessing some resources.
      * @return a [ColorStateList] that contains the data for the text color.
@@ -40,10 +38,9 @@ internal sealed class AndesButtonHierarchyInterface {
      * Returns an [Int] representing a @ColorInt that will be used when tinting the icon.
      *
      * @param context needed for accessing some resources.
-     * @return an [Int] representing a @ColorInt that will be used when tinting the icon.
+     * @return a [ColorStateList] that contains the data for the icon color.
      */
-    @ColorInt
-    abstract fun iconColor(context: Context): Int
+    fun iconColor(context: Context) = textColor(context)
 
     /**
      * Returns the [Typeface] that should be used for the text inside the [AndesButton].
@@ -62,7 +59,6 @@ internal sealed class AndesButtonHierarchyInterface {
 internal object AndesLoudButtonHierarchy : AndesButtonHierarchyInterface() {
     override fun background(context: Context, cornerRadius: Float) = getConfiguredBackground(context, cornerRadius, createBackgroundColorConfigLoud())
     override fun textColor(context: Context) = getConfiguredTextColor(context, createTextColorConfigLoud())
-    override fun iconColor(context: Context) = ContextCompat.getColor(context, R.color.andesui_button_loud_text)
 }
 
 /**
@@ -73,7 +69,6 @@ internal object AndesLoudButtonHierarchy : AndesButtonHierarchyInterface() {
 internal object AndesQuietButtonHierarchy : AndesButtonHierarchyInterface() {
     override fun background(context: Context, cornerRadius: Float) = getConfiguredBackground(context, cornerRadius, createBackgroundColorConfigQuiet())
     override fun textColor(context: Context) = getConfiguredTextColor(context, createTextColorConfigQuiet())
-    override fun iconColor(context: Context) = ContextCompat.getColor(context, R.color.andesui_button_quiet_text)
 }
 
 /**
@@ -84,5 +79,4 @@ internal object AndesQuietButtonHierarchy : AndesButtonHierarchyInterface() {
 internal object AndesTransparentButtonHierarchy : AndesButtonHierarchyInterface() {
     override fun background(context: Context, cornerRadius: Float) = getConfiguredBackground(context, cornerRadius, createBackgroundColorConfigTransparent())
     override fun textColor(context: Context) = getConfiguredTextColor(context, createTextColorConfigTransparent())
-    override fun iconColor(context: Context) = ContextCompat.getColor(context, R.color.andesui_button_transparent_text)
 }

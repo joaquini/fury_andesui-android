@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="andesui_message_quiet_bg">@color/andesui_gray40</color>
+    <color name="andesui_message_quiet_text">@color/andesui_gray800</color>
+    <color name="andesui_message_quiet_dismissable">@color/andesui_gray450</color>
+
+</resources>

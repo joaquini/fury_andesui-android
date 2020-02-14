@@ -26,7 +26,7 @@ build-job: &buildJob
     - restore_cache:
         key: gradlew-{{ checksum "./gradle/wrapper/gradle-wrapper.properties" }}
     - restore_cache:
-        key: dependencies-{{ checksum "andes/build.gradle" }}-{{ checksum "demoapp/build.gradle" }}
+        key: dependencies-{{ checksum "components/build.gradle" }}-{{ checksum "demoapp/build.gradle" }}
     - run:
         name: Run Code Analysis
         command: ./gradlew $MODULE:check -x test
@@ -52,7 +52,7 @@ build-job: &buildJob
         paths:
           - ./.gradle
           - ~/.android/build-cache/
-        key: dependencies-{{ checksum "andes/build.gradle" }}-{{ checksum "demoapp/build.gradle" }}
+        key: dependencies-{{ checksum "components/build.gradle" }}-{{ checksum "demoapp/build.gradle" }}
 ##
 # We define a job for deploying. This job will be in charge of running:
 # - Run deploy of a lib as release

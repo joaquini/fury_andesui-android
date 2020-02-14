@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="andesui_message_loud_bg">@color/andesui_bu_loud_idle</color>
+    <color name="andesui_message_loud_text">@color/andesui_white</color>
+    <color name="andesui_message_loud_dismissable">@color/andesui_white</color>
+
+</resources>

@@ -11,10 +11,15 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import com.mercadolibre.android.andesui.R
+import com.mercadolibre.android.andesui.button.factory.AndesButtonAttrs
+import com.mercadolibre.android.andesui.button.factory.AndesButtonAttrsParser
 import com.mercadolibre.android.andesui.button.factory.AndesButtonConfiguration
-import com.mercadolibre.android.andesui.button.factory.AndesButtonFactory
+import com.mercadolibre.android.andesui.button.factory.AndesButtonConfigurationFactory
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchy
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonIcon
+import com.mercadolibre.android.andesui.button.hierarchy.BackgroundColorConfig
+import com.mercadolibre.android.andesui.button.hierarchy.getConfiguredBackground
 import com.mercadolibre.android.andesui.button.size.AndesButtonSize
 
 
@@ -48,35 +53,74 @@ import com.mercadolibre.android.andesui.button.size.AndesButtonSize
  * Enabling/disabling this button is also supported.
  *
  *
- * This AndesButton relies heavily in a [config] that will be configured when this button is first created.
+ * This AndesButton relies heavily in a configuration created by [AndesButtonConfigurationFactory] from
+ * its attributes. Some values of this configuration can be updated programmatically, like [text] and [hierarchy],
+ * by accessing its related setters
+ *
  */
 class AndesButton : ConstraintLayout {
 
-    internal lateinit var textComponent: TextView
+    private lateinit var andesButtonAttrs: AndesButtonAttrs
     internal lateinit var leftIconComponent: ImageView
     internal lateinit var rightIconComponent: ImageView
-    private lateinit var config: AndesButtonConfiguration
+    internal lateinit var textComponent: TextView
+
+    /**
+     * Getter and setter for [text].
+     */
+    var text: String?
+        get() = andesButtonAttrs.andesButtonText
+        set(value) {
+            andesButtonAttrs = andesButtonAttrs.copy(andesButtonText = value)
+            textComponent.text = andesButtonAttrs.andesButtonText
+        }
+
+    /**
+     * Getter and setter for [hierarchy].
+     */
+    var hierarchy: AndesButtonHierarchy
+        get() = andesButtonAttrs.andesButtonHierarchy
+        set(value) {
+            andesButtonAttrs = andesButtonAttrs.copy(andesButtonHierarchy = value)
+            createConfig().also {
+                updateDynamicComponents(it)
+                updateComponentsAlignment(it)
+            }
+        }
+
+    /**
+     * Getter and setter for [size].
+     */
+    var size: AndesButtonSize
+        get() = andesButtonAttrs.andesButtonSize
+        set(value) {
+            andesButtonAttrs = andesButtonAttrs.copy(andesButtonSize = value)
+            createConfig().also {
+                setupHeight(it)
+                updateDynamicComponents(it)
+                updateComponentsAlignment(it)
+            }
+        }
 
     /**
      * Simplest constructor for creating an AndesButton programmatically.
      * Builds an AndesButton with Large Size and Hierarchy Loud by default.
      */
     constructor(context: Context) : super(context) {
-        initAttrs(AndesButtonSize.LARGE, AndesButtonHierarchy.LOUD, null) //Consider AndesButtonIcon.NO_ICON
+        initAttrs(SIZE_DEFAULT, HIERARCHY_DEFAULT, ICON_DEFAULT, TEXT_DEFAULT)
     }
 
     /**
-     * Constructor for creating an AndesButton programmatically with the specified [buttonSize], [buttonHierarchy] and no icon.
+     * Constructor for creating an AndesButton programmatically with the specified [buttonSize],
+     * and optionally [buttonIcon] and [buttonText].
      */
-    constructor(context: Context, buttonSize: AndesButtonSize, buttonHierarchy: AndesButtonHierarchy) : super(context) {
-        initAttrs(buttonSize, buttonHierarchy, null)
-    }
-
-    /**
-     * Constructor for creating an AndesButton programmatically with the specified [buttonSize], [buttonSize] and an [buttonIcon].
-     */
-    constructor(context: Context, buttonSize: AndesButtonSize, buttonHierarchy: AndesButtonHierarchy, buttonIcon: AndesButtonIcon?) : super(context) {
-        initAttrs(buttonSize, buttonHierarchy, buttonIcon)
+    constructor(context: Context,
+                buttonSize: AndesButtonSize = SIZE_DEFAULT,
+                buttonHierarchy: AndesButtonHierarchy = HIERARCHY_DEFAULT,
+                buttonIcon: AndesButtonIcon? = ICON_DEFAULT,
+                buttonText: String? = TEXT_DEFAULT)
+            : super(context) {
+        initAttrs(buttonSize, buttonHierarchy, buttonIcon, buttonText)
     }
 
     /**
@@ -97,26 +141,26 @@ class AndesButton : ConstraintLayout {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs)
 
     /**
-     * Sets the proper [config] for this button based on the [attrs] received via XML.
+     * Sets the proper configuration for this button based on the [attrs] received via XML.
      *
      * @param attrs attributes from the XML.
      */
     private fun initAttrs(attrs: AttributeSet?) {
-        config = AndesButtonFactory.create(context, attrs)
-        setupComponents()
+        andesButtonAttrs = AndesButtonAttrsParser.parse(context, attrs)
+        setupComponents(createConfig())
     }
 
     /**
-     * Sets the proper [config] for this button based on the [buttonSize] and [buttonHierarchy] received.
+     * Sets the proper configuration for this button based on the [buttonSize] and [buttonHierarchy] received.
      * This method will be called when this button is created programmatically.
      *
      * @param buttonSize one of the sizes available in [AndesButtonSize]
      * @param buttonHierarchy one of the hierarchies available in [AndesButtonHierarchy]
      * @param buttonIcon contains the data needed to draw an icon on the button.
      */
-    private fun initAttrs(buttonSize: AndesButtonSize, buttonHierarchy: AndesButtonHierarchy, buttonIcon: AndesButtonIcon?) {
-        config = AndesButtonFactory.create(context, buttonSize, buttonHierarchy, buttonIcon)
-        setupComponents()
+    private fun initAttrs(buttonSize: AndesButtonSize, buttonHierarchy: AndesButtonHierarchy, buttonIcon: AndesButtonIcon?, text: String?) {
+        andesButtonAttrs = AndesButtonAttrs(buttonHierarchy, buttonSize, buttonIcon?.leftIcon, buttonIcon?.rightIcon, text)
+        setupComponents(createConfig())
     }
 
     /**
@@ -124,26 +168,31 @@ class AndesButton : ConstraintLayout {
      * Is like a choreographer ;)
      *
      */
-    private fun setupComponents() {
+    private fun setupComponents(config: AndesButtonConfiguration) {
         initComponents()
 
         setupViewId()
         setupViewAsClickable()
-        setupEnabledView()
+        setupEnabledView(config)
+        setupHeight(config)
 
-        setupHeight()
+        updateDynamicComponents(config)
 
-        setupTextComponent()
         addView(textComponent)
-
-        setupLeftIconComponent()
         addView(leftIconComponent)
-
-        setupRightIconComponent()
         addView(rightIconComponent)
 
-        setupConstraints()
-        setupPaddings()
+        updateComponentsAlignment(config)
+    }
+
+    /**
+     * Responsible for update all properties related to components that can change dynamically
+     *
+     */
+    private fun updateDynamicComponents(config: AndesButtonConfiguration) {
+        setupTextComponent(config)
+        setupLeftIconComponent(config)
+        setupRightIconComponent(config)
 
         background = config.background
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -151,12 +200,11 @@ class AndesButton : ConstraintLayout {
         }
     }
 
-
     /**
      * Configures the constraints for this button.
      *
      */
-    private fun setupConstraints() {
+    private fun setupConstraints(config: AndesButtonConfiguration) {
         val set = ConstraintSet()
         set.clone(this)
         set.createHorizontalChain(
@@ -217,7 +265,7 @@ class AndesButton : ConstraintLayout {
      * Sets this button enabled or disabled based on the current config.
      *
      */
-    private fun setupEnabledView() {
+    private fun setupEnabledView(config: AndesButtonConfiguration) {
         isEnabled = config.enabled
     }
 
@@ -225,7 +273,7 @@ class AndesButton : ConstraintLayout {
      * Sets the height of this button.
      *
      */
-    private fun setupHeight() {
+    private fun setupHeight(config: AndesButtonConfiguration) {
         minHeight = config.height.toInt()
         maxHeight = config.height.toInt()
     }
@@ -234,7 +282,7 @@ class AndesButton : ConstraintLayout {
      * Gets data from the config and sets to the text component of this button.
      *
      */
-    private fun setupTextComponent() {
+    private fun setupTextComponent(config: AndesButtonConfiguration) {
         textComponent.text = config.text
         textComponent.maxLines = config.maxLines
         textComponent.isAllCaps = false
@@ -249,7 +297,7 @@ class AndesButton : ConstraintLayout {
      * If this button has no left icon then hides it.
      *
      */
-    private fun setupLeftIconComponent() {
+    private fun setupLeftIconComponent(config: AndesButtonConfiguration) {
         leftIconComponent.setImageDrawable(config.leftIcon)
         if (config.leftIcon == null) {
             leftIconComponent.visibility = View.GONE
@@ -261,7 +309,7 @@ class AndesButton : ConstraintLayout {
      * If this button has no right icon then hides it.
      *
      */
-    private fun setupRightIconComponent() {
+    private fun setupRightIconComponent(config: AndesButtonConfiguration) {
         rightIconComponent.setImageDrawable(config.rightIcon)
         if (config.rightIcon == null) {
             rightIconComponent.visibility = View.GONE
@@ -271,21 +319,22 @@ class AndesButton : ConstraintLayout {
     /**
      * Sets the paddings of the button.
      */
-    private fun setupPaddings() {
+    private fun setupPaddings(config: AndesButtonConfiguration) {
         setPadding(config.lateralPadding, paddingTop, config.lateralPadding, paddingBottom)
     }
 
     /**
-     * Sets the text to be displayed in this button.
-     *
-     * @param text text to be displayed in this button.
+     * Responsible to update components positions and constraints based on the current configuration
      */
-    fun setText(text: String) {
-        textComponent.text = text
+    private fun updateComponentsAlignment(config: AndesButtonConfiguration) {
+        setupConstraints(config)
+        setupPaddings(config)
     }
 
+    private fun createConfig() = AndesButtonConfigurationFactory.create(context, andesButtonAttrs)
+
     /**
-     * Set the enabled state of this button and its children views.
+     * Set the enabled type of this button and its children views.
      *
      * @param enabled true if this view is enabled, false otherwise.
      */
@@ -294,5 +343,23 @@ class AndesButton : ConstraintLayout {
         textComponent.isEnabled = enabled
         leftIconComponent.isEnabled = enabled
         rightIconComponent.isEnabled = enabled
+    }
+
+    internal fun changeTextColor(color : Int){
+        textComponent.setTextColor(color)
+    }
+
+    internal fun changeBackgroundColor(backgroundColorConfig: BackgroundColorConfig) {
+        background = getConfiguredBackground(context, context.resources.getDimension(R.dimen.andesui_button_border_radius_medium), backgroundColorConfig)
+    }
+
+    /**
+     * Default values for AndesButton basic properties
+     */
+    companion object {
+        private const val TEXT_DEFAULT = "Button text"
+        private val HIERARCHY_DEFAULT = AndesButtonHierarchy.LOUD
+        private val SIZE_DEFAULT = AndesButtonSize.LARGE
+        private val ICON_DEFAULT = null
     }
 }

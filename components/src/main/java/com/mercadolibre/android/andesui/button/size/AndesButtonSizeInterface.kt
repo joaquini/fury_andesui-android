@@ -1,14 +1,13 @@
 package com.mercadolibre.android.andesui.button.size
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.PorterDuff
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import com.mercadolibre.android.andesui.R
 import com.mercadolibre.android.andesui.button.AndesButton
 import com.mercadolibre.android.andesui.button.factory.IconConfig
 import com.mercadolibre.android.andesui.button.hierarchy.AndesButtonHierarchyInterface
+import com.mercadolibre.android.andesui.utils.buildScaledColoredBitmapDrawable
 
 /**
  * Defines all size related properties that an [AndesButton] needs to be drawn properly.
@@ -80,7 +79,7 @@ internal interface AndesButtonSizeInterface {
      */
     fun rightIconRightMargin(context: Context) = 0
 
-    fun lateralPadding(context: Context) : Int
+    fun lateralPadding(context: Context): Int
 
     /**
      * Returns a [Float] representing the corner radius to be used.
@@ -128,12 +127,24 @@ internal class AndesLargeButtonSize : AndesButtonSizeInterface {
     override fun cornerRadius(context: Context) = context.resources.getDimension(R.dimen.andesui_button_border_radius_large)
     override fun iconConfig(hierarchy: AndesButtonHierarchyInterface, leftIcon: Drawable?, rightIcon: Drawable?, context: Context): IconConfig? {
         if (leftIcon != null) { //Ignoring if rightIcon is also non null: Left icon has higher precedence than right
-            val leftBitmapDrawable = buildScaledBitmapDrawable(leftIcon as BitmapDrawable, context, hierarchy.iconColor(context))
+            val leftBitmapDrawable = buildScaledColoredBitmapDrawable(
+                    leftIcon as BitmapDrawable,
+                    context,
+                    context.resources.getDimensionPixelSize(R.dimen.andesui_button_icon_width),
+                    context.resources.getDimensionPixelSize(R.dimen.andesui_button_icon_height),
+                    hierarchy.iconColor(context)
+            )
             return IconConfig(leftIcon = leftBitmapDrawable, rightIcon = null)
         }
 
         if (rightIcon != null) {
-            val rightBitmapDrawable = buildScaledBitmapDrawable(rightIcon as BitmapDrawable, context, hierarchy.iconColor(context))
+            val rightBitmapDrawable = buildScaledColoredBitmapDrawable(
+                    rightIcon as BitmapDrawable,
+                    context,
+                    context.resources.getDimensionPixelSize(R.dimen.andesui_button_icon_width),
+                    context.resources.getDimensionPixelSize(R.dimen.andesui_button_icon_height),
+                    hierarchy.iconColor(context)
+            )
             return IconConfig(leftIcon = null, rightIcon = rightBitmapDrawable)
         }
 
@@ -171,26 +182,4 @@ internal class AndesSmallButtonSize : AndesButtonSizeInterface {
     override fun lateralPadding(context: Context) = context.resources.getDimension(R.dimen.andesui_button_lateral_padding_small).toInt()
     override fun cornerRadius(context: Context) = context.resources.getDimension(R.dimen.andesui_button_border_radius_small)
     override fun iconConfig(hierarchy: AndesButtonHierarchyInterface, leftIcon: Drawable?, rightIcon: Drawable?, context: Context): Nothing? = null
-}
-
-/**
- * Receives a [BitmapDrawable] which will suffer some look overhauling that includes scaling and tinting.
- * When the polishing ends, it will return a new [BitmapDrawable].
- * Size of the icon is based on Andes Specification.
- *
- * @param image image of the icon. Ok: The icon.
- * @param context needed for accessing some resources like size, you know.
- * @param color we said we will be tinting the icon and this is the color.
- * @return a complete look overhauled [BitmapDrawable].
- */
-private fun buildScaledBitmapDrawable(image: BitmapDrawable, context: Context, color: Int? = null): BitmapDrawable {
-    val scaledBitmap = Bitmap.createScaledBitmap(
-            image.bitmap,
-            context.resources.getDimensionPixelSize(R.dimen.andesui_button_icon_width),
-            context.resources.getDimensionPixelSize(R.dimen.andesui_button_icon_height),
-            true)
-    return BitmapDrawable(context.resources, scaledBitmap)
-            .apply {
-                color?.let { setColorFilter(it, PorterDuff.Mode.SRC_IN) }
-            }
 }
